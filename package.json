@@ -1,0 +1,61 @@
+{
+  "name": "react-redux-filter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webpack.config.js",
+  "dependencies": {
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "lodash.find": "^4.6.0",
+    "lodash.matches": "4.6.0",
+    "lodash.omit": "^4.5.0",
+    "mocha": "^7.0.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "reselect": "^4.0.0",
+    "fuse.js": "^3.4.6",
+    "babel-loader": "^8.0.6"
+  },
+  "devDependencies": {
+    "expect": "~25.1.0",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "@babel/preset-react": "^7.8.3",
+    "@babel/cli": "^7.0.0-beta.44",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "jsdom": "^16.1.0",
+    "mocha-jsdom": "^2.0.0",
+    "react-hot-loader": "^4.12.19",
+    "eslint": "^6.8.0",
+    "eslint-plugin-react": "^7.18.3",
+    "istanbul": "^0.4.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:nsmith7989/redux-filter.git"
+  },
+  "keywords": [
+    "react",
+    "redux",
+    "filter"
+  ],
+  "scripts": {
+    "dev": "babel src --out-dir lib --watch",
+    "build:lib": "babel src --out-dir lib",
+    "build:umd": "webpack src/index.js --config webpack.dist.config.js",
+    "build": "npm run build:lib && npm run build:umd",
+    "clean": "rm -rf lib && rm -rf dist",
+    "prepare": "npm run clean && npm run build",
+    "lint": "eslint src test --fix"
+  },
+  "author": "Kofi Bradley",
+  "bugs": {
+    "url": "https://github.com/nsmith7989/redux-filter/issues"
+  },
+  "homepage": "https://github.com/nsmith7989/redux-filter",
+  "license": "MIT"
+}
