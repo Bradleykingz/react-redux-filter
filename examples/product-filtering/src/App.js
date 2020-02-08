@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { render } from 'react-dom';
+import React, {Component} from 'react';
 import qs from 'qs';
-import Filter from 'redux-filter';
+import Filter from 'react-redux-filter';
 import sweaters from './data.js';
 
 const active = (appliedFilters, attribute, value) => {
