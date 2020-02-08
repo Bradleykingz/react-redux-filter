@@ -8,62 +8,63 @@ Higher Order React Component for filtering (and sorting) a collection of items. 
 ## Usage - With Existing Redux Store
 
 ### Store and Reducer Setup
+```js
+import {createStore,combineReducers} from 'redux';
 
-        import {createStore, combineReducers} from 'redux';
+import {reducer as filterReducer,filterActions} from 'redux-filter';
 
-        import { reducer as filterReducer, filterActions } from 'redux-filter';
+// 1. Pick a mount point where your filter state will live.
+const reducers = {
+    // ... your other reducers here
+    filters: filterReducer
+};
 
-        // 1. Pick a mount point where your filter state will live.
-        const reducers = {
-            // ... your other reducers here
-            filters: filterReducer
-        };
+const reducer = combineReducers(reducers);
 
-        const reducer = combineReducers(reducers);
+// 2. create your store, passing in some initial state at the same mount point
+const store = createStore(
+    reducer,
+    filters: {
 
-        // 2. create your store, passing in some initial state at the same mount point
-        const store = createStore(
-            reducer,
-            filters: {
+        // things that are filtered
+        subjects: window.SUBJECTS,
 
-              // things that are filtered
-              subjects: window.SUBJECTS,
-
-              // attributes that you filter.
-              // Component will return a unique list of attributes for each filterableCriteria
-              filterableCriteria: [
-                  {
-                      title: 'Filter By Practice Area',
-                      attribute: 'practices'
-                  },
-                  {
-                      title: 'Filter Alphabetically',
-                      attribute: 'initial'
-                  }
-              ],
-
-              // keys on each subject that will be searched on
-              searchKeys: ['title', 'subhead', 'practices'],
-
-              // if you need to order the filterableCriteria output
-              filterableCriteriaSortOptions: {
-                  tags: items => [...items].sort()
-              }
+        // attributes that you filter.
+        // Component will return a unique list of attributes for each filterableCriteria
+        filterableCriteria: [{
+                title: 'Filter By Practice Area',
+                attribute: 'practices'
+            },
+            {
+                title: 'Filter Alphabetically',
+                attribute: 'initial'
             }
-        );
+        ],
 
-        // 3. *IMPORTANT* Dispatch the init action
-        store.dispatch(filterActions.init());
+        // keys on each subject that will be searched on
+        searchKeys: ['title', 'subhead', 'practices'],
+
+        // if you need to order the filterableCriteria output
+        filterableCriteriaSortOptions: {
+            tags: items => [...items].sort()
+        }
+    }
+);
+
+// 3. *IMPORTANT* Dispatch the init action
+store.dispatch(filterActions.init());
+```
 
 ### Selector
 
 Build a selector for accessing your filter state. Pass in a function that resolves your filter state form the full state tree
+```js
+import {buildSelector} from 'redux-filter';
+const selector = buildSelector(state => state.filters);
 
-        import { buildSelector } from 'redux-filter';
-        const selector = buildSelector(state => state.filters);
-
-        // use when getting filter state
-        const filterState = selector(store.getState());
+// use when getting filter state
+const filterState = selector(store.getState());
+```
 
  See [results](#results) for what is returned form the filter selector
 
@@ -72,45 +73,47 @@ Build a selector for accessing your filter state. Pass in a function that resolv
 
 Wrap filter App in `<Filter>`, passing in config options as props to `<Filter>`. The component will handle the filter
  state of your application and expose actions to change filters and keyword searches.
+```js
+import React from "react";
+import Filter from "redux-filter";
+import App from "./components/App";
+
+const config = {
+  // things that are filtered
+  subjects: window.SUBJECTS,
+
+  // attributes that you filter.
+  // Component will return a unique list of attributes for each filterableCriteria
+  filterableCriteria: [
+    {
+      title: "Filter By Practice Area",
+      attribute: "practices"
+    },
+    {
+      title: "Filter Alphabetically",
+      attribute: "initial"
+    }
+  ],
+
+  // keys on each subject that will be searched on
+  searchKeys: ["title", "subhead", "practices"],
+
+  // if you need to order the filterableCriteria output
+  filterableCriteriaSortOptions: {
+    tags: items => [...items].sort()
+  }
+};
+
+// render as usual, passing in config to <Filter>
+React.render(
+  <Filter {...config}>
+    <App />
+  </Filter>,
+  document.getElementById("team-filter-root")
+);
 
 
-    import React from 'react';
-    import Filter from 'redux-filter';
-    import App from './components/App';
-
-    const config = {
-
-      // things that are filtered
-      subjects: window.SUBJECTS,
-
-      // attributes that you filter.
-      // Component will return a unique list of attributes for each filterableCriteria
-      filterableCriteria: [
-          {
-              title: 'Filter By Practice Area',
-              attribute: 'practices'
-          },
-          {
-              title: 'Filter Alphabetically',
-              attribute: 'initial'
-          }
-      ],
-
-      // keys on each subject that will be searched on
-      searchKeys: ['title', 'subhead', 'practices'],
-
-      // if you need to order the filterableCriteria output
-      filterableCriteriaSortOptions: {
-          tags: items => [...items].sort()
-      }
-    };
-
-    // render as usual, passing in config to <Filter>
-    React.render(<Filter {...config}>
-            <App />
-        </Filter>,
-        document.getElementById('team-filter-root')
-    );
+```
 
 `<Filters />` will inject the following `props` into the child component:
 
@@ -125,9 +128,8 @@ It also `count`s the number of subjects that meet the attribute.
 - `currentPage` `{Number}`. Current page after calling `goToPage`. NOTE: if a filter is applied `currentPage` will be set to 1.
 
 Example:
-
-
-    {
+```js
+ {
         title: "Sweater Type",
         values: [
             {
@@ -157,8 +159,7 @@ Example:
             }
         ]
     }
-
-
+```
 
 ### Actions
 
