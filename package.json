@@ -1,8 +1,8 @@
 {
   "name": "react-redux-filter",
   "version": "1.0.0",
-  "description": "",
-  "main": "webpack.config.js",
+  "description": "Higher order react component for filtering collections",
+  "main": "./lib/index.js",
   "dependencies": {
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -36,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:nsmith7989/redux-filter.git"
+    "url": "git@github.com:Retrobie/react-redux-filter.git"
   },
   "keywords": [
     "react",
@@ -54,8 +54,8 @@
   },
   "author": "Kofi Bradley",
   "bugs": {
-    "url": "https://github.com/nsmith7989/redux-filter/issues"
+    "url": "https://github.com/Retrobie/react-redux-filter/issues"
   },
-  "homepage": "https://github.com/nsmith7989/redux-filter",
+  "homepage": "https://github.com/Retrobie/react-redux-filter",
   "license": "MIT"
 }
