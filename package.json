@@ -9,7 +9,7 @@
     "lodash.find": "^4.6.0",
     "lodash.matches": "4.6.0",
     "lodash.omit": "^4.5.0",
-    "mocha": "^7.0.1",
+    "mocha": "^10.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
